@@ -1,18 +1,33 @@
 import express, { Router } from "express";
 import cookieParser from "cookie-parser";
-import registerUser from "../controllers/register_user.controller.js";
-import verifyUser from "../controllers/verify_user.controller.js";
-import signoutUser from "../controllers/signout_user.controller.js";
-import createProfile from "../controllers/create_profile.controller.js"
+import multer from "multer";
+import registerUser from "../controllers/register-user.controller.js";
+import verifyUser from "../controllers/verify-user.controller.js";
+import signOutUser from "../controllers/sign-out-user.controller.js";
+import createProfile from "../controllers/create-profile.controller.js"
+import encryptPassword from "../middlewares/encrypt-password.middleware.js";
+import readCookie from "../middlewares/read-cookie.middleware.js";
 
-const userRouter = Router();
+const router = Router();
 
-userRouter.use(express.json());
-userRouter.use(cookieParser());
+router.use(express.json());
+router.use(cookieParser());
 
-userRouter.post("/register", registerUser);
-userRouter.post("/verify", verifyUser);
-userRouter.post("/signout", signoutUser);
-userRouter.post("/create-profile", createProfile);
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./public/images");
+    },
 
-export default userRouter;
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "_" + file.originalname);
+    }
+});
+
+const upload = multer({storage});
+
+router.post("/register", encryptPassword, registerUser);
+router.post("/verify", verifyUser);
+router.post("/sign-out", signOutUser);
+router.post("/create-profile", upload.single("photo"), readCookie, createProfile);
+
+export default router;

@@ -28,7 +28,7 @@ const FeedbackSection = () => {
   ];
 
   return (
-    <section className="mx-24 rounded-lg shadow-lg pb-16">
+    <section className="mx-24 rounded-lg pb-16">
       <h2 className="text-3xl font-bold mb-8 text-black">What They Say</h2>
       <div className="flex gap-8">
         {feedbackData.map((item, index) => (

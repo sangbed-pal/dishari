@@ -1,7 +1,17 @@
 import mongoose from "mongoose";
 
-const schoolSchema = new mongoose.Schema({
+const organizationSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true
+    },
+    
     name: {
+        type: String,
+        required: true
+    },
+
+    type: {
         type: String,
         required: true
     },
@@ -36,17 +46,17 @@ const schoolSchema = new mongoose.Schema({
         required: true
     },
 
-    contactNumber: {
+    contact1: {
         type: Number,
         required: true
     },
 
-    alternateContactNumber: {
+    contact2: {
         type: Number,
         required: true
     }
 });
 
-const School = mongoose.model("School", schoolSchema);
+const Organization = mongoose.model("Organization", organizationSchema);
 
-export default School;
+export default Organization;

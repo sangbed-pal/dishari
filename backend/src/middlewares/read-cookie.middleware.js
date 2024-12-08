@@ -1,11 +1,13 @@
 import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../constants.js";
 
-function readCookie(req) {
+const readCookie = (req, res, next) => {
     const token = req.cookies.token;
     const email = jwt.verify(token, SECRET_KEY).email;
 
-    return email;
+    req.body.email = email;
+
+    next();
 }
 
 export default readCookie;

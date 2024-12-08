@@ -1,11 +1,18 @@
 import nodemailer from "nodemailer";
 import { GMAIL_ID, GMAIL_PASSWORD } from "../constants.js";
 
-async function sendEmail(emailId, subject, body) {
+const email = {
+    "registration": {
+        subject: "Dishari - Registration Successfull",
+        body: "Dear user,\n\nYour account has been created successfully. Please remember your credentials.\n\nComplete your profile to proceed further.\n\nThanks and regards,\nTeam Dishari"
+    }
+}
+
+const sendEmail = async (emailId, category) => {
     const transporter = nodemailer.createTransport({
         service: "gmail", 
         secure: true,
-        port: 465,
+        port: 465, 
         auth: {
             user: GMAIL_ID,
             pass: GMAIL_PASSWORD
@@ -15,8 +22,8 @@ async function sendEmail(emailId, subject, body) {
     const mailOptions = {
         from: GMAIL_ID,
         to: emailId,
-        subject: subject,
-        text: body
+        subject: email[category].subject,
+        text: email[category].body
     };
 
     try {
