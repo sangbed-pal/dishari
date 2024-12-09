@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Header = () => {
     const navigate = useNavigate();
-    const { hasSignedIn, setHasSignedIn } = useContext(signInContext);
+    const {hasSignedIn, setHasSignedIn} = useContext(signInContext);
 
     const handleSignOut = async () => {
         try {
@@ -22,7 +22,7 @@ const Header = () => {
     const defaultLinkStyles = "text-[#29af8a] font-bold hover:text-black transition-all duration-300";
 
     const links = ["Home", "Profile", "Problems", "Feedback", "Chat"];
-    const routes = ["/", "/profile/display", "/problems", "/feedback", "/chat"];
+    const routes = ["/", "/profile/view", "/problems", "/feedback", "/chat"];
 
     return (
         <header className="bg-gray-100 py-4 px-8 flex justify-between items-center fixed top-0 w-full z-50">

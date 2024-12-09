@@ -11,7 +11,7 @@ const CreateProfile = () => {
         const formData = new FormData(e.target);
 
         try {
-            await axios.post("/api/v1/user/create-profile", formData, {
+            await axios.post("/api/v1/organization/profile/create", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

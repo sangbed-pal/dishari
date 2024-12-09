@@ -4,7 +4,7 @@ import Home from "./pages/Home.jsx";
 import SignIn from './pages/SignIn.jsx';
 import SignUp from './pages/SignUp.jsx';
 import CreateProfile from "./pages/CreateProfile.jsx";
-import DisplayProfile from './pages/DisplayProfile.jsx';
+import ViewProfile from './pages/ViewProfile.jsx';
 import Problems from './pages/Problems.jsx';
 import Feedback from './pages/Feedback.jsx';
 import Chat from './pages/Chat.jsx';
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
             },
 
             {
-                path: "profile/display",
-                element: <DisplayProfile />
+                path: "profile/view",
+                element: <ViewProfile />
             },
 
             {

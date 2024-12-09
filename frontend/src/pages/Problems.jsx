@@ -1,77 +1,126 @@
-import { FiUpload } from "react-icons/fi";
-import { useState } from "react";
+import axios from "axios";
 
 const Problems = () => {
-    const [videoFile, setVideoFile] = useState(null);
-
-    const handleVideoUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setVideoFile(file);
-        }
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-    };
+        
+        // Collect form data
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+    
+        try {
+            await axios.post("/api/v1/organization/problems/submit", data);
+        } catch (error) {
+            console.error("Error submitting problem:", error);
+        }
+    };    
 
     return (
         <div className="min-h-screen text-black flex justify-center items-center py-10">
             <div className="bg-gray-100 w-[40rem] p-8 rounded-3xl mt-20">
                 <h1 className="text-3xl font-bold mb-6 text-center">Submit a Problem</h1>
                 <p className="text-gray-600 text-sm mb-10 text-center">
-                    Provide the details below to submit your problem.
+                    Fill in the details below to help us understand the problem clearly.
                 </p>
 
                 <form className="space-y-8" onSubmit={handleSubmit}>
                     <div className="space-y-4">
+                        {/* Problem Title */}
                         <input
                             type="text"
                             name="title"
-                            placeholder="Problem Title"
+                            placeholder="Enter a descriptive problem title"
                             className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
                         />
 
+                        {/* Problem Description */}
                         <textarea
                             name="description"
-                            placeholder="Problem Description"
+                            placeholder="Provide a detailed description of the problem"
                             rows="5"
                             className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
                         />
 
-                        <div>
-                            <label
-                                htmlFor="video-upload"
-                                className="w-full h-40 flex justify-center items-center bg-white text-black border-2 border-[#29af8a] rounded-lg cursor-pointer hover:bg-gray-100"
-                            >
-                                {videoFile ? (
-                                    <video
-                                        src={URL.createObjectURL(videoFile)}
-                                        controls
-                                        className="h-full w-full rounded-lg object-cover"
-                                    />
-                                ) : (
-                                    <div className="flex items-center space-x-2">
-                                        <FiUpload className="h-6 w-6" />
-                                        <span className="font-semibold text-lg">Upload Video</span>
-                                    </div>
-                                )}
-                            </label>
-                            <input
-                                type="file"
-                                name="video"
-                                id="video-upload"
-                                accept="video/*"
-                                className="hidden"
-                                onChange={handleVideoUpload}
-                            />
-                        </div>
-
+                        {/* Estimated Budget */}
                         <input
                             type="number"
                             name="budget"
-                            placeholder="Estimated Budget (in INR)"
+                            placeholder="Enter estimated budget (in INR)"
                             className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
+                        />
+
+                        {/* Affected People Count */}
+                        <input
+                            type="number"
+                            name="affectedPeopleCount"
+                            placeholder="Enter the number of affected people"
+                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
+                        />
+
+                        {/* Urgency Justification */}
+                        <textarea
+                            name="urgencyJustification"
+                            placeholder="Explain why this problem is urgent"
+                            rows="4"
+                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
+                        />
+
+                        {/* Available Resources */}
+                        <textarea
+                            name="availableResources"
+                            placeholder="Mention any available resources for solving this problem"
+                            rows="4"
+                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
+                        />
+
+                        {/* Problem Category */}
+                        <select
+                            name="category"
+                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
+                        >
+                            <option value="" disabled selected>
+                                Select Problem Category
+                            </option>
+                            <option value="health">Health & Wellbeing</option>
+                            <option value="education">Education</option>
+                            <option value="environment">Environment & Sustainability</option>
+                            <option value="infrastructure">Infrastructure & Development</option>
+                            <option value="technology">Technology & Innovation</option>
+                            <option value="social">Social Welfare</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        {/* Priority Level */}
+                        <select
+                            name="priority"
+                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
+                        >
+                            <option value="" disabled selected>
+                                Select Priority Level
+                            </option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+
+                        {/* Proposed Deadline */}
+                        <label className="block text-sm text-gray-600 font-semibold">
+                            Proposed Resolution Deadline:
+                        </label>
+                        <input
+                            type="date"
+                            name="deadline"
+                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                            required
                         />
                     </div>
 
