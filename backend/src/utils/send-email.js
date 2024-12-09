@@ -3,7 +3,7 @@ import { GMAIL_ID, GMAIL_PASSWORD } from "../constants.js";
 
 const email = {
     "registration": {
-        subject: "Dishari - Registration Successfull",
+        subject: "Dishari - Registration Successful",
         body: "Dear user,\n\nYour account has been created successfully. Please remember your credentials.\n\nComplete your profile to proceed further.\n\nThanks and regards,\nTeam Dishari"
     }
 }
