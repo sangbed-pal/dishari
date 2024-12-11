@@ -16,26 +16,6 @@ const problemSchema = new mongoose.Schema({
         required: true
     },
 
-    budget: {
-        type: Number,
-        required: true
-    },
-
-    affectedPeopleCount: {
-        type: Number,
-        required: true
-    },
-
-    urgencyJustification: {
-        type: String,
-        required: true
-    },
-
-    availableResources: {
-        type: String,
-        required: true
-    },
-
     category: {
         type: String,
         required: true
@@ -46,11 +26,12 @@ const problemSchema = new mongoose.Schema({
         required: true
     },
 
-    deadline: {
-        type: Date,
-        required: true
+    isSolved: {
+        type: Boolean,
+        required: true,
+        default: false
     }
-});
+}, {timestamps: true});
 
 const Problem = mongoose.model("Problem", problemSchema);
 
