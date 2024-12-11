@@ -3,27 +3,27 @@ import React from "react";
 const FeedbackSection = () => {
   const feedbackData = [
     {
-      name: "Govt. School A",
-      feedback: "This platform helped us get clean drinking water.",
-      image: "/images/image1.jpg",
+      name: "Bankata Primary School",
+      feedback: "This platform helped us get clean drinking water",
+      image: "/images/image10.jpg",
     },
 
     {
-      name: "Hospital A",
-      feedback: "We got essential medical supplies on time.",
-      image: "/images/image2.jpg",
+      name: "Sreerampur Gramin Hospital",
+      feedback: "We got essential medical supplies on time",
+      image: "/images/image12.jpg",
     },
 
     {
-      name: "NGO A",
-      feedback: "We connected with schools in need seamlessly.",
-      image: "/images/image3.jpg",
+      name: "Tehatta High School",
+      feedback: "We have got tremendous support from many NGOs from time to time",
+      image: "/images/image9.jpeg",
     },
     
     {
-      name: "NGO B",
-      feedback: "We are extremely happy to help those in need.",
-      image: "/images/image1.jpg",
+      name: "Child in Need Institute",
+      feedback: "We are extremely happy to help those in need",
+      image: "/images/image11.jpg",
     }
   ];
 
@@ -32,7 +32,7 @@ const FeedbackSection = () => {
       <h2 className="text-3xl font-bold mb-8 text-black">What They Say</h2>
       <div className="flex gap-8">
         {feedbackData.map((item, index) => (
-          <div key={index} className="bg-[#29af8a] p-4 rounded-md w-64">
+          <div key={index} className="bg-[#29af8a] p-4 rounded-md w-64 transition-transform duration-300 hover:scale-105">
             <img
               src={item.image}
               alt={item.name}

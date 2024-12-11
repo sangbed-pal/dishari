@@ -33,7 +33,6 @@ const CreateProfile = () => {
 
                 <form className="space-y-8" onSubmit={handleSubmit}>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Organization Information</h2>
                         <div className="space-y-4">
                             <input
                                 type="text"
@@ -45,9 +44,8 @@ const CreateProfile = () => {
                                 name="type"
                                 className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                             >
-                                <option value="" disabled>
-                                    Select Organization Type
-                                </option>
+                                <option value="" disabled selected>Select Organization Type</option>
+                                
                                 <option value="school">Government School</option>
                                 <option value="hospital">Government Hospital</option>
                                 <option value="ngo">Non-governmental Organisation (NGO)</option>

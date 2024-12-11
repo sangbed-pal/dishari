@@ -1,47 +1,78 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import signInContext from "../contexts/sign-in-context.js";
 import axios from "axios";
 
 const Header = () => {
     const navigate = useNavigate();
-    const {hasSignedIn, setHasSignedIn} = useContext(signInContext);
+
+    const {isSignedIn, setIsSignedIn} = useContext(signInContext);
+    const [organizationType, setOrganizationType] = useState("");
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response1 = await axios.get("/api/v1/auth/is-signed-in");
+                setIsSignedIn(response1.data);
+
+                const response2 = await axios.get("/api/v1/organization/type");
+                setOrganizationType(response2.data);
+            } catch(error) {
+                console.log(error);
+            }
+        })();
+    }, []);
 
     const handleSignOut = async () => {
         try {
-            await axios.post("/api/v1/user/sign-out");
+            await axios.post("/api/v1/auth/sign-out");
         } catch(error) {
             console.log(error);
         }
 
-        setHasSignedIn(false);
+        setIsSignedIn(false);
         navigate("/");
     };
 
     const activeLinkStyles = "text-black font-bold";
     const defaultLinkStyles = "text-[#29af8a] font-bold hover:text-black transition-all duration-300";
 
-    const links = ["Home", "Profile", "Problems", "Feedback", "Chat"];
-    const routes = ["/", "/profile/view", "/problems", "/feedback", "/chat"];
+    const links1 = ["Home", "Profile", "View Problems", "Feedback"];
+    const routes1 = ["/", "/profile/view", "/problems/view", "/feedback"];
+
+    const links2 = ["Home", "Profile", "Submit Problems", "Feedback"];
+    const routes2 = ["/", "/profile/view", "/problems/submit", "/feedback"];
 
     return (
         <header className="bg-gray-100 py-4 px-8 flex justify-between items-center fixed top-0 w-full z-50">
             <h1 className="text-[#29af8a] text-5xl font-serif">Dishari</h1>
 
             <div className="flex items-center space-x-8 text-lg">
-                {hasSignedIn &&
-                    links.map((link, index) => (
-                        <NavLink
-                            key={link}
-                            to={routes[index]}
-                            className={({isActive}) => isActive ? activeLinkStyles : defaultLinkStyles}
-                        >
-                            {link}
-                        </NavLink>
-                    ))
-                }
+                {isSignedIn && (
+                    organizationType === "ngo" ? (
+                        links1.map((link, index) => (
+                            <NavLink
+                                key={link}
+                                to={routes1[index]}
+                                className={({isActive}) => isActive ? activeLinkStyles : defaultLinkStyles}
+                            >
+                                {link}
+                            </NavLink>
+                        ))
+                    ) : (
+                        links2.map((link, index) => (
+                            <NavLink
+                                key={link}
+                                to={routes2[index]}
+                                className={({isActive}) => isActive ? activeLinkStyles : defaultLinkStyles}
+                            >
+                                {link}
+                            </NavLink>
+                        ))
+                    )
+                )}
 
-                {!hasSignedIn ? (
+                {!isSignedIn ? (
                     <Link to="/sign-in">
                         <button className="px-5 py-1 rounded-3xl bg-[#29af8a] text-white hover:bg-white hover:text-black hover:border-2 hover:border-[#29af8a] transition-all duration-300">
                             Sign In

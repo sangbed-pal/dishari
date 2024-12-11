@@ -11,16 +11,16 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
-    const {setHasSignedIn} = useContext(signInContext);
+    const {setIsSignedIn} = useContext(signInContext);
 
     const handleSignUp = async () => {
         try {
-            await axios.post("/api/v1/user/register", {
+            await axios.post("/api/v1/auth/register", {
                 email,
                 password
             });
 
-            setHasSignedIn(true);
+            setIsSignedIn(true);
             navigate("/profile/create");
         } catch(error) {
             console.error(error);

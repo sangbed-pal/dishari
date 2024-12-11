@@ -5,9 +5,10 @@ import SignIn from './pages/SignIn.jsx';
 import SignUp from './pages/SignUp.jsx';
 import CreateProfile from "./pages/CreateProfile.jsx";
 import ViewProfile from './pages/ViewProfile.jsx';
-import Problems from './pages/Problems.jsx';
+import ViewProblems from './pages/ViewProblems.jsx';
+import SubmitProblems from './pages/SubmitProblems.jsx';
+import ProblemDetails from './pages/ProblemDetails.jsx';
 import Feedback from './pages/Feedback.jsx';
-import Chat from './pages/Chat.jsx';
 import App from './App.jsx';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -44,18 +45,23 @@ const router = createBrowserRouter([
             },
 
             {
-                path: "problems",
-                element: <Problems />
+                path: "problems/view",
+                element: <ViewProblems />
+            },
+
+            {
+                path: "problems/submit",
+                element: <SubmitProblems />
+            },
+
+            {
+                path: "problems/details",
+                element: <ProblemDetails />
             },
 
             {
                 path: "feedback",
                 element: <Feedback />
-            },
-
-            {
-                path: "chat",
-                element: <Chat />
             }
         ]
     }

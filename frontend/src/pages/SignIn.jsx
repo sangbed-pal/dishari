@@ -11,16 +11,16 @@ const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
-    const { setHasSignedIn } = useContext(signInContext);
+    const {setIsSignedIn} = useContext(signInContext);
 
     const handleSignIn = async () => {
         try {
-            await axios.post("/api/v1/user/verify", {
+            await axios.post("/api/v1/auth/verify", {
                 email,
                 password,
             });
 
-            setHasSignedIn(true);
+            setIsSignedIn(true);
             navigate("/");
         } catch (error) {
             console.log(error);
