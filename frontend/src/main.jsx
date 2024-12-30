@@ -12,7 +12,7 @@ import Feedback from './pages/Feedback.jsx';
 import App from './App.jsx';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import SignInContextProvider from './contexts/SignInContextProvider.jsx';
+import ContextProvider from './contexts/ContextProvider.jsx';
 
 const router = createBrowserRouter([
     {
@@ -69,8 +69,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <SignInContextProvider>
+        <ContextProvider>
             <RouterProvider router={router} />
-        </SignInContextProvider>
+        </ContextProvider>
     </StrictMode>,
 );

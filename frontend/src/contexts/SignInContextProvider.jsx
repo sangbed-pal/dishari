@@ -1,7 +1,7 @@
 import { useState } from "react";
 import signInContext from "./sign-in-context.js";
 
-function SignInContextProvider({children}) {
+const SignInContextProvider = ({children}) => {
     const [isSignedIn, setIsSignedIn] = useState(false);
 
     return (

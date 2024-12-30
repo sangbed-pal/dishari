@@ -1,14 +1,15 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import signInContext from "../contexts/sign-in-context.js";
+import organizationContext from "../contexts/organization-context.js";
 import axios from "axios";
 
 const Header = () => {
     const navigate = useNavigate();
 
     const {isSignedIn, setIsSignedIn} = useContext(signInContext);
-    const [organizationType, setOrganizationType] = useState("");
-
+    const {organizationType, setOrganizationType} = useContext(organizationContext);
+    
     useEffect(() => {
         (async () => {
             try {
@@ -37,11 +38,11 @@ const Header = () => {
     const activeLinkStyles = "text-black font-bold";
     const defaultLinkStyles = "text-[#29af8a] font-bold hover:text-black transition-all duration-300";
 
-    const links1 = ["Home", "Profile", "View Problems", "Feedback"];
-    const routes1 = ["/", "/profile/view", "/problems/view", "/feedback"];
+    const links1 = ["Home", "Profile", "View Problems", "Problem History", "Feedback"];
+    const routes1 = ["/", "/profile/view", "/problems/view", "/problems/history", "/feedback"];
 
-    const links2 = ["Home", "Profile", "Submit Problems", "Feedback"];
-    const routes2 = ["/", "/profile/view", "/problems/submit", "/feedback"];
+    const links2 = ["Home", "Profile", "Submit Problems", "Problem History", "Feedback"];
+    const routes2 = ["/", "/profile/view", "/problems/submit", "/problems/history", "/feedback"];
 
     return (
         <header className="bg-gray-100 py-4 px-8 flex justify-between items-center fixed top-0 w-full z-50">
