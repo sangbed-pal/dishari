@@ -1,15 +1,12 @@
-import express, { Router } from "express";
-import cookieParser from "cookie-parser";
+import { Router } from "express";
 import readCookie from "../middlewares/read-cookie.middleware.js";
-import { getProblems, submitProblem, solveProblem } from "../controllers/problem.controller.js";
+import { getMyProblems, getProblems, submitProblem, updateProblem } from "../controllers/problem.controller.js";
 
 const router = Router();
 
-router.use(express.json());
-router.use(cookieParser());
-
-router.get("/get", getProblems);
-router.post("/submit", readCookie, submitProblem);
-router.post("/solve", readCookie, solveProblem)
+router.get("/", getProblems);
+router.get("/me", readCookie, getMyProblems);
+router.post("/", readCookie, submitProblem);
+router.patch("/:uid", updateProblem);
 
 export default router;

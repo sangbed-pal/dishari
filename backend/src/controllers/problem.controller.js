@@ -1,5 +1,9 @@
 import Problem from "../models/problem.model.js";
-import Organization from "../models/organization.model.js";
+import Organization from "../models/profile.model.js";
+
+export const getMyProblems = (req, res) => {
+
+};
 
 export const getProblems = async (req, res) => {
     try {
@@ -23,7 +27,7 @@ export const getProblems = async (req, res) => {
         res.status(200).json(data); // Send the response with the data
     } catch(error) {
         console.log(error);
-        res.status(500).json({ message: "An error occurred" });
+        res.status(500).json({message: "An error occurred"});
     }
 };
 
@@ -37,6 +41,6 @@ export const submitProblem = async (req, res) => {
     }
 };
 
-export const solveProblem = (req, res) => {
+export const updateProblem = (req, res) => {
 
 };

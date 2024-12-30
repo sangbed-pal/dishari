@@ -3,9 +3,9 @@ import { SECRET_KEY } from "../constants.js";
 
 const readCookie = (req, res, next) => {
     const token = req.cookies.token;
-    const email = jwt.verify(token, SECRET_KEY).email;
+    const uid = jwt.verify(token, SECRET_KEY).uid;
 
-    req.body.email = email;
+    req.body.uid = uid;
 
     next();
 }

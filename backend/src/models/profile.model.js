@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
-const organizationSchema = new mongoose.Schema({
-    email: {
-        type: String,
+const profileSchema = new mongoose.Schema({
+    uid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     
@@ -54,9 +55,16 @@ const organizationSchema = new mongoose.Schema({
     contact2: {
         type: Number,
         required: true
+    },
+
+    problems: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Problem",
+        required: true,
+        default: []
     }
 });
 
-const Organization = mongoose.model("Organization", organizationSchema);
+const Profile = mongoose.model("Profile", profileSchema);
 
-export default Organization;
+export default Profile;
