@@ -11,10 +11,10 @@ const CreateProfile = () => {
         const formData = new FormData(e.target);
 
         try {
-            await axios.post("/api/v1/organization/profile/create", formData, {
+            await axios.post("/api/v1/profile", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                },
+                }
             });
 
             navigate("/");
@@ -38,18 +38,23 @@ const CreateProfile = () => {
                                 type="text"
                                 name="name"
                                 placeholder="Organization Name"
+                                required
                                 className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                             />
+
                             <select
                                 name="type"
                                 className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
+                                defaultValue=""
+                                required
                             >
-                                <option value="" disabled selected>Select Organization Type</option>
+                                <option value="" disabled>Organization Type</option>
                                 
                                 <option value="school">Government School</option>
                                 <option value="hospital">Government Hospital</option>
                                 <option value="ngo">Non-governmental Organisation (NGO)</option>
                             </select>
+
                             <div>
                                 <label
                                     htmlFor="file-upload"
@@ -61,6 +66,7 @@ const CreateProfile = () => {
                                 <input
                                     type="file"
                                     name="photo"
+                                    required
                                     id="file-upload"
                                     className="hidden"
                                 />
@@ -75,6 +81,7 @@ const CreateProfile = () => {
                                 type="text"
                                 name="street"
                                 placeholder="Street Name"
+                                required
                                 className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                             />
                             <div className="flex space-x-4">
@@ -82,12 +89,14 @@ const CreateProfile = () => {
                                     type="text"
                                     name="city"
                                     placeholder="City/Village"
+                                    required
                                     className="w-1/2 px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                                 />
                                 <input
                                     type="text"
                                     name="district"
                                     placeholder="District"
+                                    required
                                     className="w-1/2 px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                                 />
                             </div>
@@ -96,12 +105,14 @@ const CreateProfile = () => {
                                     type="number"
                                     name="pin"
                                     placeholder="Pin Code"
+                                    required
                                     className="w-1/2 px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                                 />
                                 <input
                                     type="text"
                                     name="landmark"
                                     placeholder="Landmark"
+                                    required
                                     className="w-1/2 px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                                 />
                             </div>
@@ -115,12 +126,14 @@ const CreateProfile = () => {
                                 type="tel"
                                 name="contact1"
                                 placeholder="Contact Number"
+                                required
                                 className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                             />
                             <input
                                 type="tel"
                                 name="contact2"
                                 placeholder="Alternate Contact Number"
+                                required
                                 className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                             />
                         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const FeedbackSection = () => {
+const Feedback = () => {
   const feedbackData = [
     {
       name: "Bankata Primary School",
@@ -47,4 +47,4 @@ const FeedbackSection = () => {
   );
 };
 
-export default FeedbackSection;
+export default Feedback;

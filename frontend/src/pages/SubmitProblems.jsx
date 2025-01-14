@@ -1,6 +1,9 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SubmitProblems = () => {
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -8,9 +11,14 @@ const SubmitProblems = () => {
         const data = Object.fromEntries(formData.entries());
     
         try {
-            await axios.post("/api/v1/problems/submit", data);
-        } catch (error) {
-            console.error("Error submitting problem:", error);
+            const response = await axios.post("/api/v1/problems", data);
+            const pid = response.data.pid;
+
+            await axios.patch("/api/v1/profile", {pid});
+
+            navigate("/problems/history");
+        } catch(error) {
+            console.log(error);
         }
     };    
 
@@ -39,35 +47,6 @@ const SubmitProblems = () => {
                             className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                             required
                         />
-
-                        <select
-                            name="category"
-                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
-                            required
-                        >
-                            <option value="" disabled selected>Select Problem Category</option>
-                            
-                            <option value="health">Health & Well-being</option>
-                            <option value="education">Education</option>
-                            <option value="infrastructure">Infrastructure & Development</option>
-                            <option value="technology">Technology</option>
-                            <option value="social">Social Welfare</option>
-                            <option value="other">Other</option>
-                        </select>
-
-                        <select
-                            name="priority"
-                            className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
-                            required
-                        >
-                            <option value="" disabled selected>
-                                Select Priority Level
-                            </option>
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                            <option value="critical">Critical</option>
-                        </select>
                     </div>
 
                     <button

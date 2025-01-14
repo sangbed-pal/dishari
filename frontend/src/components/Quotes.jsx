@@ -1,6 +1,6 @@
 import React from "react";
 
-const QuotesSection = () => {
+const Quotes = () => {
   const quotes = [
     {
       imgSrc: "/images/image6.jpg",
@@ -51,4 +51,4 @@ const QuotesSection = () => {
   );
 };
 
-export default QuotesSection;
+export default Quotes;

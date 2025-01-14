@@ -6,23 +6,22 @@ import axios from "axios";
 import signInContext from "../contexts/sign-in-context.js";
 
 const SignIn = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-
-    const navigate = useNavigate();
     const {setIsSignedIn} = useContext(signInContext);
+    const navigate = useNavigate();
+    
+    const handleSignIn = async (e) => {
+        e.preventDefault();
 
-    const handleSignIn = async () => {
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
         try {
-            await axios.post("/api/v1/auth/verify", {
-                email,
-                password,
-            });
+            await axios.post("/api/v1/token", data);
 
             setIsSignedIn(true);
             navigate("/");
-        } catch (error) {
+        } catch(error) {
             console.log(error);
         }
     };
@@ -36,21 +35,21 @@ const SignIn = () => {
                         Welcome back! Please enter your details to sign in.
                     </p>
 
-                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-6" onSubmit={handleSignIn}>
                         <input
                             type="email"
+                            name="email"
                             placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-4 py-3 rounded-3xl bg-white text-black border-2 border-[#29af8a] focus:outline-none focus:border-black placeholder-gray-400"
+                            required
                         />
 
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
+                                name="password"
                                 placeholder="Enter your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                required
                                 className="w-full px-4 py-3 rounded-3xl bg-white text-black border-2 border-[#29af8a] focus:outline-none focus:border-black placeholder-gray-400"
                             />
 
@@ -68,9 +67,8 @@ const SignIn = () => {
                         </div>
 
                         <button
-                            type="button"
+                            type="submit"
                             className="w-full bg-white text-black py-3 rounded-3xl font-semibold border-2 border-[#29af8a] focus:outline-none hover:bg-[#29af8a] hover:text-white hover:border-white transition duration-300"
-                            onClick={handleSignIn}
                         >
                             Sign In
                         </button>

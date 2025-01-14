@@ -7,7 +7,7 @@ const ViewProfile = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get("/api/v1/organization/profile/get");
+                const response = await axios.get("/api/v1/profile/me?field=all");
                 setData(response.data);
             } catch(error) {
                 console.log(error);
@@ -43,6 +43,15 @@ const ViewProfile = () => {
                                 {data.type}
                             </p>
                         </div>
+
+                        {data.category && (
+                            <div>
+                                <h3 className="text-gray-700 font-medium">Category</h3>
+                                <p className="w-full px-4 py-3 rounded-lg bg-white border-2 border-[#29af8a]">
+                                    {data.category}
+                                </p>
+                            </div>
+                        )}
 
                         <div>
                             <h3 className="text-gray-700 font-medium">Photo</h3>
@@ -115,13 +124,6 @@ const ViewProfile = () => {
                                         {data.contact2}
                                     </p>
                                 </div>
-                            </div>
-
-                            <div>
-                                <h3 className="text-gray-700 font-medium">Email</h3>
-                                <p className="w-full px-4 py-3 rounded-lg bg-white border-2 border-[#29af8a]">
-                                    {data.email}
-                                </p>
                             </div>
                         </div>
                     </div>

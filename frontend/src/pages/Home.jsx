@@ -1,15 +1,15 @@
 import Banner from "../components/Banner.jsx";
-import QuotesSection from "../components/QuotesSection.jsx";
-import FAQSection from "../components/FAQSection.jsx";
-import FeedbackSection from "../components/FeedbackSection.jsx";
+import Quotes from "../components/Quotes.jsx";
+import FrequentlyAskedQuestions from "../components/FrequentlyAskedQuestions.jsx";
+import Feedback from "../components/Feedback.jsx";
 
 const Home = () => {
     return (
         <div>
             <Banner />
-            <QuotesSection />
-            <FAQSection />
-            <FeedbackSection />
+            <Quotes />
+            <FrequentlyAskedQuestions />
+            <Feedback />
         </div>
     );
 };

@@ -8,6 +8,7 @@ import ViewProfile from './pages/ViewProfile.jsx';
 import ViewProblems from './pages/ViewProblems.jsx';
 import SubmitProblems from './pages/SubmitProblems.jsx';
 import ProblemDetails from './pages/ProblemDetails.jsx';
+import ProblemHistory from './pages/ProblemHistory.jsx';
 import Feedback from './pages/Feedback.jsx';
 import App from './App.jsx';
 import './index.css';
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
             {
                 path: "problems/submit",
                 element: <SubmitProblems />
+            },
+
+            {
+                path: "problems/history",
+                element: <ProblemHistory />
             },
 
             {

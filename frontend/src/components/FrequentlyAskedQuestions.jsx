@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const FAQSection = () => {
+const FrequentlyAskedQuestions = () => {
     const faqData = [
         { question: "What is this platform about?", answer: "This platform aims at bridging the gap between help seekers and help providers. Government schools and hospitals facing any kind of problems can submit the same on this platform. They will get assistance from NGOs very quickly." },
         { question: "Who can register?", answer: "Any government school/hospital and NGO can register." },
-        { question: "How can an NGO contribute?", answer: "On this platform, you can view all the problems that have been submitted by various schools and hospitals. If you are willing to solve a particualar problem, you will be connected with the concerned school/hospital immediately." },
+        { question: "How can an NGO contribute?", answer: "On this platform, you can view all the problems that have been submitted by various schools and hospitals. If you are willing to solve a particular problem, you will be connected with the concerned school/hospital immediately." },
     ];
 
     const [openIndex, setOpenIndex] = useState(null);
@@ -59,4 +59,4 @@ const FAQSection = () => {
     );
 };
 
-export default FAQSection;
+export default FrequentlyAskedQuestions;

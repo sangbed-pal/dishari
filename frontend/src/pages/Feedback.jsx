@@ -1,18 +1,22 @@
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
 
         try {
-            await axios.post("/api/v1/feedback/submit", formData, {
+            await axios.post("/api/v1/feedback", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
+
+            navigate("/");
         } catch(error) {
             console.log(error);
         }
@@ -30,9 +34,11 @@ const Feedback = () => {
                     <div className="space-y-4">
                         <select
                             name="rating"
+                            defaultValue=""
+                            required
                             className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none"
                         >
-                            <option value="" disabled selected>Select Rating</option>
+                            <option value="" disabled>Select Rating</option>
                             <option value="5">Excellent</option>
                             <option value="4">Very Good</option>
                             <option value="3">Good</option>
@@ -44,6 +50,7 @@ const Feedback = () => {
                             name="feedback"
                             rows="5"
                             placeholder="Your Feedback"
+                            required
                             className="w-full px-4 py-3 rounded-lg bg-white text-black border-2 border-[#29af8a] focus:outline-none resize-none"
                         />
                     </div>

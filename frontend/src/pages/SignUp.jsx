@@ -7,23 +7,23 @@ import signInContext from "../contexts/sign-in-context.js";
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const navigate = useNavigate();
     const {setIsSignedIn} = useContext(signInContext);
+    const navigate = useNavigate();
+    
+    const handleSignUp = async (e) => {
+        e.preventDefault();
 
-    const handleSignUp = async () => {
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
         try {
-            await axios.post("/api/v1/auth/register", {
-                email,
-                password
-            });
+            await axios.post("/api/v1/user", data);
+            await axios.post("/api/v1/token", data);
 
             setIsSignedIn(true);
             navigate("/profile/create");
         } catch(error) {
-            console.error(error);
+            console.log(error);
         }
     };
 
@@ -36,12 +36,12 @@ const SignUp = () => {
                         Create your account by filling in the details below.
                     </p>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSignUp}>
                         <input
                             type="email"
+                            name="email"
                             placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            required
                             className="w-full px-4 py-3 rounded-3xl bg-white text-black border-2 border-[#29af8a] focus:outline-none focus:border-black placeholder-gray-400"
                         />
 
@@ -49,8 +49,8 @@ const SignUp = () => {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Enter your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
+                                required
                                 className="w-full px-4 py-3 rounded-3xl bg-white text-black border-2 border-[#29af8a] focus:outline-none focus:border-black placeholder-gray-400"
                             />
 
@@ -68,9 +68,8 @@ const SignUp = () => {
                         </div>
 
                         <button
-                            type="button"
+                            type="submit"
                             className="w-full bg-white text-black py-3 rounded-3xl font-semibold border-2 border-[#29af8a] focus:outline-none hover:bg-[#29af8a] hover:text-white hover:border-2 hover:border-white transition duration-300"
-                            onClick={handleSignUp}
                         >
                             Sign Up
                         </button>

@@ -13,11 +13,15 @@ const Header = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response1 = await axios.get("/api/v1/auth/is-signed-in");
-                setIsSignedIn(response1.data);
+                const response1 = await axios.get("/api/v1/token/status");
+                const status = response1.data.status;
 
-                const response2 = await axios.get("/api/v1/organization/type");
-                setOrganizationType(response2.data);
+                if(status === "Valid") {
+                    setIsSignedIn(true);
+                }
+
+                const response2 = await axios.get("/api/v1/profile/me?field=type");
+                setOrganizationType(response2.data.type);
             } catch(error) {
                 console.log(error);
             }
@@ -26,7 +30,7 @@ const Header = () => {
 
     const handleSignOut = async () => {
         try {
-            await axios.post("/api/v1/auth/sign-out");
+            await axios.delete("/api/v1/token");
         } catch(error) {
             console.log(error);
         }
