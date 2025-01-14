@@ -20,7 +20,7 @@ const upload = multer({storage});
 router.get("/me", readCookie, getMyProfile);
 router.get("/:uid", getProfile);
 router.post("/", upload.single("photo"), readCookie, createProfile);
-router.patch("/:pid", readCookie, updateProfile);
+router.patch("/", readCookie, updateProfile);
 router.delete("/", readCookie, deleteProfile);
 
 export default router;

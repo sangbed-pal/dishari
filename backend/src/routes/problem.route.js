@@ -4,9 +4,9 @@ import { getMyProblems, getProblems, submitProblem, updateProblem } from "../con
 
 const router = Router();
 
-router.get("/", getProblems);
+router.get("/", readCookie, getProblems);
 router.get("/me", readCookie, getMyProblems);
 router.post("/", readCookie, submitProblem);
-router.patch("/:uid", updateProblem);
+router.patch("/", updateProblem);
 
 export default router;

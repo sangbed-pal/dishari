@@ -2,7 +2,6 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../constants.js";
-import User from "../models/user.model.js";
 
 export const checkTokenStatus = async (req, res) => {
     const cookies = req.cookies;

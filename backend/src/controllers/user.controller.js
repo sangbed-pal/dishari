@@ -17,7 +17,11 @@ export const createUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     const uid = req.uid;
-    await User.findByIdAndDelete(uid);
 
-    res.json({message: "User deleted successfully"});
+    try {
+        await User.findByIdAndDelete(uid);
+        res.status(200).json({message: "User deleted successfully"});
+    } catch(error) {
+        res.status(500).json({error: "Internal server error"});
+    }
 };

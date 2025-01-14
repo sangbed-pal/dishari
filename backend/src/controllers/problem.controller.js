@@ -1,46 +1,56 @@
 import Problem from "../models/problem.model.js";
-import Organization from "../models/profile.model.js";
+import Profile from "../models/profile.model.js";
 
-export const getMyProblems = (req, res) => {
+export const getMyProblems = async (req, res) => {
+    const uid = req.body.uid;
 
-};
-
-export const getProblems = async (req, res) => {
     try {
-        const data = [];
-        const problems = await Problem.find();
+        const profile = await Profile.findOne({uid}, "problems");
+        const problems = await Problem.find({_id: {$in: profile.problems}});
 
-        // Create an array of promises for asynchronous operations
-        const promises = problems.map(async (problem) => {
-            const organization = await Organization.findOne({email: problem.email});
-            data.push({
-                problem, 
-                organization
-            });
-        });
-
-        // Wait for all promises to resolve
-        await Promise.all(promises);
-
-        console.log(data); // This will log the data after the loop has completed
-
-        res.status(200).json(data); // Send the response with the data
-    } catch(error) {
-        console.log(error);
-        res.status(500).json({message: "An error occurred"});
-    }
-};
-
-
-export const submitProblem = async (req, res) => {
-    try {
-        await Problem.create(req.body);
-        res.status(201).json({message: "Problem submitted successfully"});
+        res.status(200).json(problems);
     } catch(error) {
         res.status(500).json({error: "Internal server error"});
     }
 };
 
-export const updateProblem = (req, res) => {
+export const getProblems = async (req, res) => {
+    const uid = req.body.uid;
 
+    try {
+        const problems = await Problem.find({isSolved: false});
+        res.status(200).json(problems);
+    } catch(error) {
+        res.status(500).json({message: "Internal server error"});
+    }
+};
+
+export const submitProblem = async (req, res) => {
+    const {uid, title, description} = req.body;
+
+    try {
+        const problem = await Problem.create({
+            uid,
+            title,
+            description,
+        });
+
+        res.status(201).json({
+            message: "Problem submitted successfully",
+            pid: problem._id
+        });
+    } catch(error) {
+        res.status(500).json({error: "Internal server error"});
+    }
+};
+
+export const updateProblem = async (req, res) => {
+    const pid = req.body.pid;
+
+    try {
+        await Problem.findByIdAndUpdate(pid, {isSolved: true});
+        res.status(200).json({message: "Problem updated successfully"});
+    } catch(error) {
+        res.status(500).json({error: "Internal server error"});
+    }
 };

@@ -17,16 +17,6 @@ const problemSchema = new mongoose.Schema({
         required: true
     },
 
-    category: {
-        type: String,
-        required: true
-    },
-
-    priority: {
-        type: String,
-        required: true
-    },
-
     isSolved: {
         type: Boolean,
         required: true,
