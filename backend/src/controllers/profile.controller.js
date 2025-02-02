@@ -1,18 +1,14 @@
 import Profile from "../models/profile.model.js";
 import uploadOnCloudinary from "../utils/cloudinary.js";
+import {cacheProfile} from "../utils/redis.js";
 
 export const getMyProfile = async (req, res) => {
     const uid = req.body.uid;
     const field = req.query.field;
 
     try {
-        if(field === "all") {
-            const profile = await Profile.findOne({uid});
-            res.status(200).json(profile);
-        } else {
-            const profile = await Profile.findOne({uid}, field);
-            res.status(200).json(profile);
-        }
+        const profile = await cacheProfile(uid, field, "get");
+        res.status(200).json(profile);
     } catch(error) {
         res.status(500).json({error: "Internal server error"});
     }
@@ -23,13 +19,15 @@ export const getProfile = async (req, res) => {
     const field = req.query.field;
 
     try {
-        if(field === "all") {
+        const profile = await cacheProfile(uid, field, "get");
+        res.status(200).json(profile);
+        /*if(field === "all") {
             const profile = await Profile.findOne({uid});
             res.status(200).json(profile);
         } else {
             const profile = await Profile.findOne({uid}, field);
             res.status(200).json(profile);
-        }
+        }*/
     } catch(error) {
         res.status(500).json({error: "Internal server error"});
     }
@@ -68,6 +66,7 @@ export const updateProfile = async (req, res) => {
 
     try {
         await Profile.findOneAndUpdate({uid}, {$push: {problems: pid}});
+        cacheProfile(uid, null, "update");
         res.status(200).json({message: "Profile updated successfully"});
     } catch(error) {
         res.status(500).json({error: "Internal server error"});

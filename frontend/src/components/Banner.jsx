@@ -18,11 +18,11 @@ const Banner = () => {
     }, [images.length]);
 
     return (
-        <div className="relative h-[70vh] overflow-hidden mt-16 mb-24">
+        <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden mt-10 mb-16 md:mt-16 md:mb-24">
             <img
                 src={images[currentImage]}
                 alt="Social Service"
-                className={`object-cover w-full h-full`}
+                className="object-cover w-full h-full"
             />
         </div>
     );

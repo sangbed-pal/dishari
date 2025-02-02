@@ -20,19 +20,19 @@ const Quotes = () => {
   ];
 
   return (
-    <section className="mb-16 mx-24">
-      <div className="space-y-12">
+    <section className="mb-12 md:mb-16 px-4 md:px-12 lg:px-24">
+      <div className="space-y-8 md:space-y-12">
         {quotes.map((item, index) => (
           <div
             key={index}
-            className={`flex items-center ${
-              item.reverse ? "flex-row-reverse" : "flex-row"
-            } border-4 border-[#29af8a] rounded-3xl p-4`}
+            className={`flex flex-col ${
+              item.reverse ? "md:flex-row-reverse" : "md:flex-row"
+            } items-center border-4 border-[#29af8a] rounded-3xl p-4 md:p-6`}
           >
             <div
-              className={`flex-shrink-0 w-40 h-40 overflow-hidden rounded-md ${
-                item.reverse ? "ml-4 md:ml-8" : "mr-4 md:mr-8"
-              }`}
+              className={`flex-shrink-0 w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-md ${
+                item.reverse ? "md:ml-8" : "md:mr-8"
+              } mb-4 md:mb-0`}
             >
               <img
                 src={item.imgSrc}
@@ -41,7 +41,7 @@ const Quotes = () => {
               />
             </div>
 
-            <div className="text-black text-sm md:text-base lg:text-lg italic font-medium">
+            <div className="text-black text-sm md:text-base lg:text-lg italic font-medium text-center md:text-left">
               {item.quote}
             </div>
           </div>

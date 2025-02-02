@@ -31,13 +31,13 @@ const ProblemHistory = () => {
 
     return (
         <div className="min-h-screen text-black flex justify-center items-center py-10">
-            <div className="w-[90%] max-w-6xl">
-                <h1 className="text-3xl font-bold mb-8 text-center">Problem History</h1>
+            <div className="w-full sm:w-[90%] max-w-6xl">
+                <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center mt-10 sm:mt-12">Problem History</h1>
 
                 {problems.length === 0 ? (
-                    <p className="text-center text-gray-600 text-lg">No problems available at the moment</p>
+                    <p className="text-center text-gray-600 text-base sm:text-lg">No problems available at the moment</p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                         {problems.map((problem) => {
                             return (
                                 <Problem key={problem._id} problem={problem} showStatus={true}/>

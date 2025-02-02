@@ -5,7 +5,7 @@ export const getMyProblems = async (req, res) => {
     const uid = req.body.uid;
 
     try {
-        const profile = await Profile.findOne({uid}, "problems");
+        const profile = await Profile.findOne({uid}, "problems"); // only fetching the "problems" field
         const problems = await Problem.find({_id: {$in: profile.problems}});
 
         res.status(200).json(problems);
