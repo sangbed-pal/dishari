@@ -22,5 +22,7 @@ jobs:
         script: |
           cd dishari/backend
           git pull origin main
-          npm i
-          pm2 restart src/main.js
+          npm install
+          pm2 delete main || true
+          pm2 start src/main.js
+          pm2 save
