@@ -20,9 +20,7 @@ jobs:
         username: ubuntu  
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd dishari
-          git sparse-checkout set backend
+          cd dishari/backend
           git pull origin main
-          cd backend
           npm i
           pm2 restart src/main.js
