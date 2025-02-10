@@ -13,10 +13,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.get('/test',(req,res)=>
-{
-    res.json('Hello world');
+
+app.get('/test', (req, res) => {
+    res.send("Backend server running successfully...");
 })
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/token", tokenRouter);
 app.use("/api/v1/profile", profileRouter);
