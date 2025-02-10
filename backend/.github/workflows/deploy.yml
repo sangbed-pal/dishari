@@ -21,8 +21,9 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           cd dishari/backend
+          git reset --hard origin/main
           git pull origin main
           npm install
           pm2 delete main || true
-          pm2 start src/main.js
+          pm2 restart main || pm2 start src/main.js
           pm2 save
