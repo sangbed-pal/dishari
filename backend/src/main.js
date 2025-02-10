@@ -14,9 +14,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/test', (req, res) => {
+app.get('/test1', (req, res) => {
     res.send("Backend server running successfully...");
-})
+});
+
+app.get('/test2', (req, res) => {
+    res.send("CI/CD pipeline set up successfully...");
+});
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/token", tokenRouter);
